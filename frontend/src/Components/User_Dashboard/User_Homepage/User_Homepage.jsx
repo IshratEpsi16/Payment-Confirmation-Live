@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import './User_Homepage.css'
 const User_Homepage = () => {
+    const navigate = useNavigate();
     //const { notifications, updateNotifications } = useNotificationContext();
     //const { notifications, updateNotifications } = useNotificationContext();
     // const [fetchNotifications, setFetchNotifications] = useState(false);
@@ -45,6 +46,12 @@ const User_Homepage = () => {
             })
             .catch(err => console.log(err));
     };
+    const handleLogout = () => {
+        // Clear any user-related data from localStorage or state
+        localStorage.removeItem('id');
+        // Redirect to the '/' path
+        navigate('/');
+      }
 
 
     // Modify the button click event handlers
@@ -138,7 +145,7 @@ const User_Homepage = () => {
                                 <p>Phone: {profileInfo.PHONE_NUMBER}</p>
                             </div>
                             <div className='logout'>
-                                <button className='btn btn-success ' >Logout</button>
+                                <button className='btn btn-success ' onClick={handleLogout} >Logout</button>
                             </div>
                         </div>
 
