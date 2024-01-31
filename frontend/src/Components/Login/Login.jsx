@@ -7,6 +7,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 //import Validation from './LoginValidation';
 import 'bootstrap/dist/css/bootstrap.min.css';
+//new
 const Login = () => {
     const [employeeId, setEmployeeId] = useState('')
     const [employeePassword, setEmployeePassword] = useState('')
