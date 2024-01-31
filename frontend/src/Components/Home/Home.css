@@ -1,0 +1,37 @@
+.image {
+    width: 150px;
+    /* Ensure the image doesn't exceed its original size */
+    height: 50px;
+    /* Ensure the image doesn't exceed its original size */
+}
+
+.right {
+    background-color: rgb(177, 213, 251);
+
+}
+
+.tableclass {
+    margin-top: 3%;
+}
+
+.icon {
+    padding-top: 20px;
+    padding: 20px;
+    width: 100px;
+    height: 100px;
+    margin-left: 50px;
+
+}
+
+.search {
+    margin-top: 5%;
+
+
+}
+
+
+
+.nav {
+    margin-right: 70%;
+    text-decoration: none;
+}

@@ -1,0 +1,12 @@
+.loginPage {
+    background: url('images/tumblr_4504b4c479ba554760347e63f889c1b9_e7979025_400.gif');
+    background-color: blue, url(images/seven-rings-cement.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 120%;
+}
+
+.loginForm {
+    background-color: rgb(52, 47, 199);
+    color: rgb(255, 255, 255);
+}

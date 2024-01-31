@@ -1,0 +1,74 @@
+.loginPage {
+    background: url('images/tumblr_4504b4c479ba554760347e63f889c1b9_e7979025_400.gif');
+    background-color: blue, url(images/seven-rings-cement.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 120%;
+}
+
+.loginForm {
+    background-color: rgb(235, 235, 241);
+    color: rgb(10, 10, 10);
+}
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Set a height to center vertically within the viewport */
+}
+
+.forgot {
+    text-decoration: none;
+    font-size: 14px;
+    color: rgb(29, 29, 240);
+}
+
+.sign {
+    font-size: 14px;
+    color: rgb(70, 68, 68);
+}
+
+.button {
+    background-color: rgb(36, 36, 181);
+    color: #ffffff;
+    width: 100px;
+
+
+    transition: background-color 0.3s ease;
+    /* Smooth transition effect */
+
+    /* Add additional styling if needed */
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: rgb(169, 9, 23);
+    /* Change the background color on hover */
+}
+
+.text-color1 {
+    color: rgb(114, 115, 116);
+
+}
+
+.text-color {
+    color: rgb(36, 36, 181);
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+}
+
+.img {
+    max-width: 150px;
+    /* Ensure the image doesn't exceed its original size */
+    max-height: 100px;
+    /* Ensure the image doesn't exceed its original size */
+}
+
+.eyeicon2 {
+    margin-left: 280px;
+    margin-top: -30px;
+}
