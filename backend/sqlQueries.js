@@ -39,8 +39,8 @@ const queries = {
   WHERE EMPLOYEE_ID = :employee_id AND EMPLOYEE_PASSWORD = STANDARD_HASH(:employee_password)
     `,
   signup: `
-  INSERT INTO XXCRM.ADMIN_SIGNUP_TABLE(Employee_ID, Employee_Name, Phone_Number, Email, Employee_Password, Confirm_Password)
-  VALUES (:employee_id, :employee_name, :phone_number, :email,STANDARD_HASH(:employee_password) , STANDARD_HASH(:confirm_password))
+  INSERT INTO XXCRM.ADMIN_SIGNUP_TABLE(Employee_ID, Employee_Name,NID_NO, Phone_Number, Email, Employee_Password, Confirm_Password)
+  VALUES (:employee_id, :employee_name, :nid_no, :phone_number, :email,STANDARD_HASH(:employee_password) , STANDARD_HASH(:confirm_password))
     `,
   createRecord: `
       INSERT INTO XXCRM.XXSSGIL_CASH_PAY_DET(

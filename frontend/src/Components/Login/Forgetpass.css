@@ -1,0 +1,80 @@
+.ForgetPassForm {
+    background-color: rgb(235, 235, 241);
+    color: rgb(10, 10, 10);
+    width: 30%;
+    height: 30%;
+    margin: 15px;
+    margin-top: 136px;
+    margin-bottom: 136px;
+
+
+
+}
+
+.ForgetPassPage {
+
+    background-color: rgb(207, 207, 235);
+
+}
+
+.center-container-pass {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Set a height to center vertically within the viewport */
+}
+
+.forgot {
+    text-decoration: none;
+    font-size: 14px;
+    color: rgb(29, 29, 240);
+}
+
+.sign {
+    font-size: 14px;
+    color: rgb(70, 68, 68);
+}
+
+.button {
+    background-color: rgb(36, 36, 181);
+    color: #ffffff;
+    width: 100px;
+
+
+    transition: background-color 0.3s ease;
+    /* Smooth transition effect */
+
+    /* Add additional styling if needed */
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: rgb(169, 9, 23);
+    /* Change the background color on hover */
+}
+
+.text-color1 {
+    color: rgb(114, 115, 116);
+
+}
+
+.text-color {
+    color: rgb(36, 36, 181);
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+}
+
+.img {
+    max-width: 150px;
+    /* Ensure the image doesn't exceed its original size */
+    max-height: 100px;
+    /* Ensure the image doesn't exceed its original size */
+}
+
+.eyeicon {
+    margin-left: 380px;
+    margin-top: -30px;
+}

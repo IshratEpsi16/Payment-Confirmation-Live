@@ -155,3 +155,11 @@ commit
     and PAYEE_ID = :payeeId
     
     
+DELETE FROM  XXCRM.XXSSGIL_CASH_PAY_DET
+WHERE STATUS = 'sent'
+commit
+-------------forget password------------
+UPDATE  XXCRM.ADMIN_SIGNUP_TABLE 
+SET  EMPLOYEE_PASSWORD= '12345'
+WHERE EMPLOYEE_ID = '222'
+commit

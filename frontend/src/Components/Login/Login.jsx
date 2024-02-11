@@ -22,40 +22,39 @@ const Login = () => {
     const navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
-
+    
         axios.post('http://192.168.7.15:8081/login', {
             employeeId,
             employeePassword
-
         })
-            .then(res => {
-                console.log("Server Response:", res);
-
-                if (res.data || res.data.status === 'success') {
-                    const role = res.data.role;
-                    localStorage.setItem("id", employeeId)
-                    console.log('role', role)
-
-                    if (role === 'admin') {
-                        // Redirect to the admin page
-                        navigate('/home');
-                    } else if (role == null) {
-                        // Redirect to the user page
-                        navigate('/userhome');
-                    } else {
-                        console.error('Invalid role:', role);
-                        alert('Invalid role');
-                    }
+        .then(res => {
+            console.log("Server Response:", res);
+    
+            if (res.data || res.data.status === 'success') {
+                const role = res.data.role;
+                localStorage.setItem("id", employeeId);
+    
+                if (role === 'admin') {
+                    navigate('/home');
+                    window.location.reload();
+                } else if (role == null) {
+                    navigate('/userhome');
+                    window.location.reload();
                 } else {
-                    console.error('Login failed. Server response:', res.data);
-                    alert('Invalid ID or password');
+                    console.error('Invalid role:', role);
+                    alert('Invalid role');
                 }
-            })
-            .catch(err => {
-                console.error("Error during POST request:", err);
-                alert('Invalid ID or Password provided');
-            });
+            } else {
+                console.error('Login failed. Server response:', res.data);
+                alert('Invalid ID or password');
+            }
+        })
+        .catch(err => {
+            console.error("Error during POST request:", err);
+            alert('Invalid ID or Password provided');
+        });
     };
+    
 
 
     // const handleInput = (event) => {
@@ -90,8 +89,8 @@ const Login = () => {
                     </div>
                     {errors.password && <span className='text-danger'>{errors.password}</span>}
 
-                    <button className="m-3 button btn btn-primary" type="submit">Login</button><br></br>
-                    <a href="#" className='m-3 forgot'>Forgot Password?</a>
+                                   <button className="m-3 button btn btn-primary" type="submit">Login</button><br></br>
+                    <a href="#" className='m-3 forgot'><Link to='/forgetpassword'>Forgot Password?</Link></a>
 
 
                     <p className='m-3 sign'>Don't have any account?&nbsp;<Link to='/signup'>Sign Up</Link></p>

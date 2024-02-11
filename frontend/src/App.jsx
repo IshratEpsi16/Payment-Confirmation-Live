@@ -1,32 +1,36 @@
-//import { useState } from 'react'
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import SignUp from './Components/Signup/Signup';
-import { NotificationProvider } from '../src/Components/CreatePage/NotificationContext'
+import { NotificationProvider } from '../src/Components/CreatePage/NotificationContext';
 import Customer from './Customer';
-import { useState } from 'react';
 import Login from './Components/Login/Login';
 import Home from './Components/Home/Home';
 import CreatePage from './Components/CreatePage/CreatePage';
 import User_Homepage from './Components/User_Dashboard/User_Homepage/User_Homepage';
+import ForgetPass from './Components/Login/Forgetpass';
+import Authenticated from './Components/Login/Authenticated';
+
 
 const USER_TYPES = {
   PUBLIC: 'Public User',
   NORMAL_USER: 'Normal User',
   ADMIN_USER: 'Admin User'
-}
+};
 
-const CURRENT_USER_TYPE = USER_TYPES.ADMIN_USER
+const CURRENT_USER_TYPE = USER_TYPES.ADMIN_USER;
 function App() {
-
-
-  // Callback function to update the message
 
   const [message, setMessage] = useState('');
 
   const sendMessage = (message) => {
     setMessage(message);
   };
+
+  const isLoggedIn = localStorage.getItem('id');
+  // Callback function to update the message
+
+ 
   return (<>
     {/*/userhome/:id <div>Logged in as {CURRENT_USER_TYPE}</div> */}
     <BrowserRouter>
@@ -34,16 +38,60 @@ function App() {
         <Routes>
           <Route path='/' element={<PublicElement><Login /></PublicElement>}></Route>
           <Route path='/signup' element={<PublicElement><SignUp /></PublicElement>}></Route>
-          <Route path='/home' element={<Adminlement><Home /></Adminlement>}></Route>
+          <Route path='/forgetpassword' element={<PublicElement><ForgetPass /></PublicElement>}></Route>
+          <Route path='/authenticated' element={<PublicElement><Authenticated /></PublicElement>}></Route>
+          <Route
+              path='/'
+              element={
+                isLoggedIn ? (
+                  <Navigate to='/home' />
+                ) : (
+                  <PublicElement>
+                    <Login />
+                  </PublicElement>
+                )
+              }
+            >
 
-          <Route path="/create" element={<CreatePage />} />
-          <Route path="/userhome" element={<User_Homepage />} />
-
-
-          {/* <Route path='/create' element={<Adminlement><CreatePage onSend={handleSend} /></Adminlement>}></Route> */}
-          <Route path='/customer' element={<Customer />}></Route>
-          {/* <Route path='/userhome' element={<UserElement><User_Homepage message={message} /></UserElement>}></Route> */}
-          <Route path='*' element={<div>Page not found</div>}></Route>
+</Route>
+            <Route
+              path='/home'
+              element={
+                isLoggedIn ? (
+                  < Adminlement>
+                    <Home />
+                  </ Adminlement>
+                ) : (
+                  <Navigate to='/' />
+                )
+              }
+            ></Route>
+            <Route
+              path='/create'
+              element={
+                isLoggedIn ? (
+                  < Adminlement>
+                    <CreatePage />
+                  </ Adminlement>
+                ) : (
+                  <Navigate to='/' />
+                )
+              }
+            ></Route>
+            <Route
+              path='/userhome'
+              element={
+                isLoggedIn ? (
+                  <UserElement>
+                    <User_Homepage />
+                  </UserElement>
+                ) : (
+                  <Navigate to='/' />
+                )
+              }
+            ></Route>
+            <Route path='/customer' element={<Customer />} />
+            <Route path='*' element={<div>Page not found</div>} />
         </Routes>
       </NotificationProvider>
     </BrowserRouter>

@@ -330,6 +330,7 @@ app.post('/signup', (req, res) => {
         const bindVars = {
             employee_id: req.body.employeeId,
             employee_name: req.body.employeeName,
+            nid_no: req.body.nidNo,
             phone_number: req.body.phoneNumber,
             email: req.body.email,
             employee_password: req.body.employeePassword,
@@ -391,6 +392,34 @@ app.post('/create', (req, res) => {
     });
 });
 
+
+// backend code
+// Add this route to handle password reset
+app.post('/forgetpassword', async (req, res) => {
+    const { employeeId, nidNo } = req.body;
+    
+    // Query the database to check if the provided employee ID and NID exist
+    const sql = `SELECT * FROM XXCRM.ADMIN_SIGNUP_TABLE WHERE EMPLOYEE_ID = :empId AND NID_NO = :nid`;
+    const bindParams = { empId: employeeId, nid: nidNo };
+    
+    try {
+        const connection = await oracledb.getConnection(dbConfig);
+        const result = await connection.execute(sql, bindParams);
+        
+        if (result.rows.length > 0) {
+            // If the user exists, navigate to '/authenticated'
+            res.json({ message: 'User found. Password can be reset.', navigate: true });
+        } else {
+            // If the user does not exist, return unauthorized
+            res.status(401).json({ error: 'Unauthorized. Invalid employee ID or NID number.', navigate: false });
+        }
+        
+        connection.close();
+    } catch (error) {
+        console.error('Error resetting password:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 
 
