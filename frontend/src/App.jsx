@@ -39,7 +39,7 @@ function App() {
           <Route path='/' element={<PublicElement><Login /></PublicElement>}></Route>
           <Route path='/signup' element={<PublicElement><SignUp /></PublicElement>}></Route>
           <Route path='/forgetpassword' element={<PublicElement><ForgetPass /></PublicElement>}></Route>
-          <Route path='/authenticated' element={<PublicElement><Authenticated /></PublicElement>}></Route>
+          <Route path='/authenticated/:id' element={<PublicElement><Authenticated /></PublicElement>}></Route>
           <Route
               path='/'
               element={

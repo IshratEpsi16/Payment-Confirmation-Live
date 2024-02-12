@@ -19,19 +19,19 @@ const ForgetPass = () => {
                 employeeId,
                 nidNo
             });
-
-            console.log(response.data);
+    
             if (response.data.navigate) {
-                alert("Password reset initiated. You'll be redirected.");
-                navigate('/authenticated');
+                // Navigate to authenticated page with the employeeId as a parameter
+                navigate(`/authenticated/${employeeId}`);
             } else {
                 alert("Unauthorized. Invalid employee ID or NID number.");
             }
         } catch (error) {
             console.error("Error during password reset:", error);
-            alert("Wrong Input!Please provide correct ID/NID no");
+            alert("Error resetting password. Please try again later.");
         }
     };
+    
 
 
     // const handleInput = (event) => {

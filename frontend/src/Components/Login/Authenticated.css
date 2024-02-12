@@ -4,8 +4,8 @@
     width: 30%;
     height: 30%;
     margin: 15px;
-    margin-top: 105px;
-    margin-bottom: 106px;
+    margin-top: 115px;
+    margin-bottom: 120px;
 
 
 
@@ -71,7 +71,7 @@
     /* Ensure the image doesn't exceed its original size */
 }
 
-.eyeicon {
+.eyeiconAuth {
     margin-left: 380px;
-    margin-top: -30px;
+    margin-top: -50px;
 }

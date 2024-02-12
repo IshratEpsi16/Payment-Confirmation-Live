@@ -423,6 +423,41 @@ app.post('/forgetpassword', async (req, res) => {
 
 
 
+// Add a new route to update the user's password
+// Add a new route to update the user's password
+app.put('/updatepassword/:id', async (req, res) => {
+    const { employeeId, newPassword, confirmPassword } = req.body;
+
+    // Check if newPassword and confirmPassword match
+    if (newPassword !== confirmPassword) {
+        return res.status(400).json({ error: "New password and confirm password do not match" });
+    }
+
+    // Update the password in the database using bind variables
+    const sql = `UPDATE XXCRM.ADMIN_SIGNUP_TABLE SET EMPLOYEE_PASSWORD = STANDARD_HASH(:newPassword), CONFIRM_PASSWORD = STANDARD_HASH(:confirmPassword) WHERE EMPLOYEE_ID = :empId`;
+    const bindParams = { newPassword, confirmPassword, empId: employeeId };
+
+    try {
+        const connection = await oracledb.getConnection(dbConfig);
+        const result = await connection.execute(sql, bindParams, { autoCommit: true });
+
+        // Check if the update was successful
+        if (result.rowsAffected > 0) {
+            res.json({ message: 'Password updated successfully' });
+        } else {
+            res.status(500).json({ error: 'Failed to update password' });
+        }
+
+        connection.close();
+    } catch (error) {
+        console.error('Error updating password:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
+
+
 
 
 app.listen(8081, () => {
