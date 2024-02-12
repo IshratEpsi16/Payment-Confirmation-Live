@@ -399,7 +399,7 @@ app.post('/forgetpassword', async (req, res) => {
     const { employeeId, nidNo } = req.body;
     
     // Query the database to check if the provided employee ID and NID exist
-    const sql = `SELECT * FROM XXCRM.ADMIN_SIGNUP_TABLE WHERE EMPLOYEE_ID = :empId AND NID_NO = :nid`;
+    const sql = queries.forgetpassword;
     const bindParams = { empId: employeeId, nid: nidNo };
     
     try {
@@ -434,7 +434,8 @@ app.put('/updatepassword/:id', async (req, res) => {
     }
 
     // Update the password in the database using bind variables
-    const sql = `UPDATE XXCRM.ADMIN_SIGNUP_TABLE SET EMPLOYEE_PASSWORD = STANDARD_HASH(:newPassword), CONFIRM_PASSWORD = STANDARD_HASH(:confirmPassword) WHERE EMPLOYEE_ID = :empId`;
+    
+    const sql = queries.updatepassword;
     const bindParams = { newPassword, confirmPassword, empId: employeeId };
 
     try {

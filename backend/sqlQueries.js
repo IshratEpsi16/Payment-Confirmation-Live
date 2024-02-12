@@ -52,6 +52,8 @@ const queries = {
         FROM_TZ(CAST(SYSDATE AS TIMESTAMP), 'UTC') AT TIME ZONE 'Asia/Dhaka'
       )
     `,
+    forgetpassword:`SELECT * FROM XXCRM.ADMIN_SIGNUP_TABLE WHERE EMPLOYEE_ID = :empId AND NID_NO = :nid`,
+    updatepassword:`UPDATE XXCRM.ADMIN_SIGNUP_TABLE SET EMPLOYEE_PASSWORD = STANDARD_HASH(:newPassword), CONFIRM_PASSWORD = STANDARD_HASH(:confirmPassword) WHERE EMPLOYEE_ID = :empId`,
 };
 
 module.exports = queries;
