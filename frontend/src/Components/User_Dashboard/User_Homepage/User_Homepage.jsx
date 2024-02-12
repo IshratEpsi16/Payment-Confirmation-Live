@@ -38,19 +38,26 @@ const User_Homepage = () => {
     });
 
     // Add a function to handle updating status
-    const updateStatus = (response, payeeId, currentPeriod) => {
-        axios.put(`http://192.168.7.15:8081/updateStatus/${payeeId}/${currentPeriod}/${response.toLowerCase()}`)
-            .then(res => {
-                console.log(res.data.message);
-                // Optionally, you can update the state or perform any other actions
-            })
-            .catch(err => console.log(err));
-    };
+// Add a function to handle updating status
+const updateStatus = (response, payeeId, currentPeriod) => {
+    axios.put(`http://192.168.7.15:8081/updateStatus/${payeeId}/${currentPeriod}/${response.toLowerCase()}`)
+        .then(res => {
+            console.log(res.data.message);
+            // Reload the page after successful update
+            window.location.reload();
+        })
+        .catch(err => console.log(err));
+};
+
     const handleLogout = () => {
         // Clear any user-related data from localStorage or state
         localStorage.removeItem('id');
         // Redirect to the '/' path
         navigate('/');
+      }
+      const autoRefresh = () => {
+        // Clear any user-related data from localStorage or state
+        window.location.reload();
       }
 
 
@@ -80,8 +87,8 @@ const User_Homepage = () => {
 
                         <h3 className='text-center p-5 text-primary'>Welcome to User Homepage</h3>
 
+<button type="button" className="btn btn-outline-warning" onClick={autoRefresh}>Refresh</button>
 
-                        {console.log('notification:', notifications)}
                         {notifications.map((item, i) => (
                             <div key={i}>
                                 <p>{item.EMPLOYEE_NAME} did you receive your payment for <b>{item.CURRENT_PERIOD}</b>?</p>

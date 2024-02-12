@@ -204,16 +204,12 @@ app.get('/profileInfo/:empId', (req, res) => {
         });
     });
 });
-
-// Add a new endpoint for updating the status
-// ...
-
 app.put('/updateStatus/:payeeId/:currentPeriod/:response', (req, res) => {
     const payeeId = req.params.payeeId;
     const currentPeriod = req.params.currentPeriod;
     const response = req.params.response;
 
-    oracledb.getConnection(dbConfig, (err, connection) => {
+    oracledb.getConnection(dbConfig, async (err, connection) => {
         if (err) {
             console.error('Error connecting to the database:', err.message);
             res.status(500).json({ error: 'Internal Server Error' });
@@ -231,24 +227,26 @@ app.put('/updateStatus/:payeeId/:currentPeriod/:response', (req, res) => {
             return;
         }
 
+        const bindParams = {
+            newStatus: newStatus,
+            payeeId: payeeId,
+            currentPeriod: currentPeriod
+        };
         const sql = queries.updateStatus;
-        connection.execute(sql, [newStatus, payeeId, currentPeriod], { autoCommit: true }, (err, result) => {
-
-            if (err) {
-                console.error('Error updating status:', err.message);
-                res.status(500).json({ error: 'Internal Server Error' });
-                connection.close();
-                return;
-            }
+        try {
+            const result = await connection.execute(sql, bindParams, { autoCommit: true });
 
             if (result.rowsAffected === 0) {
                 res.status(404).json({ error: 'No matching record found for the given PAYEE_ID and status "Sent".' });
             } else {
                 res.json({ message: 'Status updated successfully' });
             }
-
+        } catch (error) {
+            console.error('Error updating status:', error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        } finally {
             connection.close();
-        });
+        }
     });
 });
 

@@ -25,12 +25,13 @@ const queries = {
       SELECT * FROM XXCRM.ADMIN_SIGNUP_TABLE WHERE EMPLOYEE_ID = :empId
     `,
   updateStatus: `
-    UPDATE XXCRM.XXSSGIL_CASH_PAY_DET
-    SET STATUS = :newStatus
-    WHERE 1=1
-    AND PAYEE_ID = :payeeId
-    AND CURRENT_PERIOD = :currentPeriod
-    AND STATUS = 'Sent'
+  UPDATE XXCRM.XXSSGIL_CASH_PAY_DET
+  SET STATUS = :newStatus,
+      LAST_UPDATE_DATE = FROM_TZ(CAST(SYSDATE AS TIMESTAMP), 'UTC') AT TIME ZONE 'Asia/Dhaka'
+  WHERE 1=1
+  AND PAYEE_ID = :payeeId
+  AND CURRENT_PERIOD = :currentPeriod
+  AND STATUS = 'Sent'
 `
   ,
   login: `
