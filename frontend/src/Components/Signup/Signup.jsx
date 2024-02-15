@@ -117,23 +117,23 @@ const SignUp = () => {
 
                         {errors.employeeName && <span className='text-danger'>{errors.employeeName}</span>}
                     </div>
-                    <div className="m-3 text-color1">
+                    {/* <div className="m-3 text-color1">
                         <label htmlFor="phoneNumber" className="form-label">Phone Number</label>
                         <input type="number" maxlength="11" onChange={e => setPhoneNumber(e.target.value)} className="form-control" id="phoneNumber" required />
 
 
-                    </div>
+                    </div> */}
                     <div className="m-3 text-color1">
                         <label htmlFor="phoneNumber" className="form-label">NID No.</label>
                         <input type="number"  onChange={e => setNidNo(e.target.value)} className="form-control" id="phoneNumber" required />
 
 
                     </div>
-                    <div className="m-3 text-color1">
+                    {/* <div className="m-3 text-color1">
                         <label htmlFor="exampleInputEmail1" className="form-label">Email</label>
                         <input onChange={e => setEmail(e.target.value)} type="email" name='email' className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required />
 
-                    </div>
+                    </div> */}
                     {errors.email && <span className='text-danger'>{errors.email}</span>}
                     <div className="m-3 text-color1">
                         <label htmlFor="exampleInputPassword1" className="form-label">Password</label>

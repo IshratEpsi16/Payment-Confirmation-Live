@@ -132,7 +132,7 @@ const CreatePage = () => {
                     <table className='table table-striped-columns"'>
                         <thead className='table-info '>
                             <tr>
-                                <th>Transaction ID</th>
+                                {/* <th>Transaction ID</th> */}
                                 <th>Payee ID</th>
                                 <th>Payee Name</th>
                                 <th>Cash Amount</th>
@@ -146,7 +146,7 @@ const CreatePage = () => {
                             {console.log('cy', customer)}
                             {customer.map((item, i) => (
                                 <tr key={i}>
-                                    <td>{item.TRANSACTION_ID}</td>
+                                    {/* <td>{item.TRANSACTION_ID}</td> */}
 
                                     <td>{item.PAYEE_ID}</td>
 

@@ -84,9 +84,10 @@ const Home = () => {
                     </a>
 
                     <div className='nav'>
-
-                        <Link to='/create' style={{ textDecoration: 'none' }}>Create</Link>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="#" style={{ textDecoration: 'none' }}>Update</a>
+                    
+                        <Link to='/create' style={{ textDecoration: 'none' }}><button type="button" className="btn btn-success">Send Notification</button></Link>&nbsp;&nbsp;&nbsp;&nbsp;
+                        
+                        {/* <a href="#" style={{ textDecoration: 'none' }}>Update</a> */}
                     </div>
                     <div className='text-danger' >
 
@@ -165,7 +166,7 @@ const Home = () => {
                                 <p>ID : {profileInfo.EMPLOYEE_ID}</p>
                                 {/* <p>ID : {profileInfo.EMPLOYEE_ID}</p> */}
                                 <p>Name : {profileInfo.EMPLOYEE_NAME}</p>
-                                <p>Phone: {profileInfo.PHONE_NUMBER}</p>
+                                {/* <p>Phone: {profileInfo.PHONE_NUMBER}</p> */}
 
                             </div>
                         </div>

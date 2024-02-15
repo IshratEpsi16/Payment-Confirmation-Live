@@ -149,7 +149,7 @@ const updateStatus = (response, payeeId, currentPeriod) => {
 
                                 <p>ID : {profileInfo.EMPLOYEE_ID}</p>
                                 <p>Name : {profileInfo.EMPLOYEE_NAME}</p>
-                                <p>Phone: {profileInfo.PHONE_NUMBER}</p>
+                                {/* <p>Phone: {profileInfo.PHONE_NUMBER}</p> */}
                             </div>
                             <div className='logout'>
                                 <button className='btn btn-success ' onClick={handleLogout} >Logout</button>

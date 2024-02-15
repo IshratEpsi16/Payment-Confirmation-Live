@@ -2,7 +2,8 @@
 
 const queries = {
   getCustomTableData:
-    `select * from XXSSGIL_CASH_PAY_DET`,
+    `select * from XXSSGIL_CASH_PAY_DET
+    order by CREATION_DATE desc`,
   getAllData: `
       SELECT a1.LOOKUP_CODE PAYEE_ID, a1.meaning PAYEE_NAME, a1.description CASH_AMOUNT, 
              a1.tag MAIL_ADDRESS, TO_CHAR(A1.START_DATE_ACTIVE, 'DD-MON-YYYY') START_DATE, 
@@ -53,6 +54,10 @@ const queries = {
         FROM_TZ(CAST(SYSDATE AS TIMESTAMP), 'UTC') AT TIME ZONE 'Asia/Dhaka'
       )
     `,
+    checkIdExists: `
+    SELECT * FROM XXCRM.ADMIN_SIGNUP_TABLE WHERE Employee_ID = :employee_id
+`,
+
     forgetpassword:`SELECT * FROM XXCRM.ADMIN_SIGNUP_TABLE WHERE EMPLOYEE_ID = :empId AND NID_NO = :nid`,
     updatepassword:`UPDATE XXCRM.ADMIN_SIGNUP_TABLE SET EMPLOYEE_PASSWORD = STANDARD_HASH(:newPassword), CONFIRM_PASSWORD = STANDARD_HASH(:confirmPassword) WHERE EMPLOYEE_ID = :empId`,
 };
