@@ -87,6 +87,12 @@ const SignUp = () => {
             })
             .catch(err => {
                 console.error("Error during POST request:", err);
+                if (err.response && err.response.status === 409) {
+                    alert("Employee ID already exists. Please choose a different ID.");
+                } else {
+                    //alert("An error occurred during signup. Please try again later.");
+                    alert("Employee ID already exists.Please provide correct ID");
+                }
             });
     };
 

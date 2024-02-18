@@ -316,13 +316,29 @@ app.post('/login', (req, res) => {
 
 
 
-app.post('/signup', (req, res) => {
-    oracledb.getConnection(dbConfig, (err, connection) => {
+
+
+app.post('/signup', async (req, res) => {
+    oracledb.getConnection(dbConfig, async (err, connection) => {
         if (err) {
             console.error('Error connecting to the database:', err.message);
             return res.status(500).json({ error: 'Database connection error' });
         }
 
+        // Check if the employee ID already exists
+        const checkIdExistsSql = queries.checkIdExists;
+        try {
+            const resultCheckId = await connection.execute(checkIdExistsSql, { employee_id: req.body.employeeId });
+            if (resultCheckId.rows.length > 0) {
+                return res.status(400).json({ error: 'Employee ID already exists' });
+            }
+        } catch (error) {
+            console.error('Error checking employee ID:', error);
+            connection.close();
+            return res.status(500).json({ error: 'Error checking employee ID' });
+        }
+
+        // If the employee ID doesn't exist, proceed with signup
         const sql = queries.signup;
 
         const bindVars = {

@@ -55,8 +55,11 @@ const queries = {
       )
     `,
     checkIdExists: `
-    SELECT * FROM XXCRM.ADMIN_SIGNUP_TABLE WHERE Employee_ID = :employee_id
+    SELECT *
+    FROM XXCRM.ADMIN_SIGNUP_TABLE
+    WHERE Employee_ID = :employee_id
 `,
+
 
     forgetpassword:`SELECT * FROM XXCRM.ADMIN_SIGNUP_TABLE WHERE EMPLOYEE_ID = :empId AND NID_NO = :nid`,
     updatepassword:`UPDATE XXCRM.ADMIN_SIGNUP_TABLE SET EMPLOYEE_PASSWORD = STANDARD_HASH(:newPassword), CONFIRM_PASSWORD = STANDARD_HASH(:confirmPassword) WHERE EMPLOYEE_ID = :empId`,
