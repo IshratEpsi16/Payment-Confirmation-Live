@@ -130,6 +130,7 @@ const Home = () => {
                                         <th>Cash Amount</th>
                                         <th>PERIOD</th>
                                         <th>CREATION DATE</th>
+                                        <th>ACCEPTED DATE</th>
                                         <th>STATUS</th>
                                     </tr>
                                 </thead>
@@ -142,6 +143,7 @@ const Home = () => {
                                             <td>{item.CASH_AMOUNT}</td>
                                             <td>{item.CURRENT_PERIOD}</td>
                                             <td>{formatDate(item.CREATION_DATE)}</td>
+                                            <td>{formatDate(item.LAST_UPDATE_DATE)}</td>
                                             <td>{item.STATUS}</td>
                                         </tr>
                                     ))}
