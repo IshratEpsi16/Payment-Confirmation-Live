@@ -1,10 +1,12 @@
 import React from 'react';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState,useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import img from '../../../public/images/logo.png'
 import profile from '../../../public/images/default-profile.png'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import { Link } from 'react-router-dom';
 import './Home.css'
 const Home = () => {
@@ -16,6 +18,8 @@ const Home = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [loading, setLoading] = useState(false);
     const [notFound, setNotFound] = useState(false);
+    const searchResultsRef = useRef(null);
+ 
     const [searchButtonClicked, setSearchButtonClicked] = useState(false);
     useEffect(() => {
         setCustomData([]); // Clear the customdata state
@@ -36,6 +40,10 @@ const Home = () => {
             .catch(err => console.log(err));
     });
     const formatDate = (dateString) => {
+        if (!dateString) {
+            return null; // Return null if dateString is null
+        }
+        
         const options = {
             day: 'numeric',
             month: 'short',
@@ -44,12 +52,25 @@ const Home = () => {
             minute: 'numeric',
             hour12: true,
         };
-
+    
         const formattedDate = new Intl.DateTimeFormat('en-US', options).format(new Date(dateString));
-
+    
         return formattedDate;
     };
+    
+    const handleExportPDF = () => {
+        const input = searchResultsRef.current;
 
+        html2canvas(input)
+            .then((canvas) => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const width = pdf.internal.pageSize.getWidth();
+                const height = pdf.internal.pageSize.getHeight();
+                pdf.addImage(imgData, 'JPEG', 0, 0, width, height);
+                pdf.save('search_results.pdf');
+            });
+    };
 
 
     const handleSearchButtonClick = (e) => {
@@ -99,7 +120,7 @@ const Home = () => {
 
             <div className='container'>
 
-                <div className='row'>
+                <div className='row' ref={searchResultsRef}>
 
 
                     <div className='col-11'>
@@ -120,6 +141,9 @@ const Home = () => {
                         </div>
                         {loading && <p>Loading...</p>}
                         {notFound && <p>Not Found</p>}
+                        {searchResults.length > 0 && (
+                            <button className="btn btn-primary" onClick={handleExportPDF}>Export as PDF</button>
+                        )}
                         {query && searchButtonClicked && !loading && !notFound && (
                             <table className='table tableclass table-striped-columns"'>
                                 <thead className='table-info '>
